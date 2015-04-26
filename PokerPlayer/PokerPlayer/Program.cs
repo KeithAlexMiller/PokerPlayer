@@ -108,7 +108,7 @@ namespace PokerPlayer
         public bool HasStraight()
         {
 
-            if (HighCard(playerHand) == Rank.Ace)
+            if (playerHand.Contains(Rank.Ace))
             {
                 return (playerHand.Distinct().OrderBy(x => x.Rank).First().Rank - playerHand.Distinct().OrderBy(x => x.Rank).Select(4).Rank) == 3;
             }
@@ -136,29 +136,7 @@ namespace PokerPlayer
         {
             return (playerHand.Distinct().OrderByDescending(x => x.Rank).First().Rank - playerHand.Distinct().OrderByDescending(x => x.Rank).Last().Rank) == 1 && playerHand.GroupBy(x => x.Suit).Where(x => x.Count() == 5).Count() == 1 && playerHand.OrderByDescending(x => x.Rank).First().Equals(Rank.Ace);
         }
-        public enum Rank
-        {
-            Two = 2,
-            Three,
-            Four,
-            Five,
-            Six,
-            Seven,
-            Eight,
-            Nine,
-            Ten,
-            Jack,
-            Queen,
-            King,
-            Ace
-        }
-        public enum Suit
-        {
-            Club,
-            Heart,
-            Diamond,
-            Spade
-        }
+
     }
     class Deck
     {
@@ -191,7 +169,7 @@ namespace PokerPlayer
             {
                 for (int j = 2; j < 15; j++)
                 {
-                    DeckOfCards.Add(new Card((Rank)j, (Suit)i));
+                    DeckOfCards.Add(new Card(j, i));
                 }
                 suitCounter++;
             }
@@ -257,9 +235,32 @@ namespace PokerPlayer
 
         public Card(int rank, int suit) //needs to be data type of Rank and Suit
         {
-            this.Rank = rank;
-            this.Suit = suit;
+            this.Rank = (Rank)rank;
+            this.Suit = (Suit)suit;
         }
     }
+            public enum Rank
+        {
+            Two = 2,
+            Three,
+            Four,
+            Five,
+            Six,
+            Seven,
+            Eight,
+            Nine,
+            Ten,
+            Jack,
+            Queen,
+            King,
+            Ace
+        }
+        public enum Suit
+        {
+            Club,
+            Heart,
+            Diamond,
+            Spade
+        }
 
 }
