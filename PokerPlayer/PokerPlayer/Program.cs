@@ -110,12 +110,11 @@ namespace PokerPlayer
         public bool HasStraight()
         {
 
-            if (playerHand.OrderByDescending(x => x.Rank).First().Rank.Equals(14));
+            if (playerHand.OrderByDescending(x => x.Rank).First().Rank.Equals(14))
             {
                 return (playerHand.Distinct().OrderBy(x => x.Rank).First().Rank) - (playerHand.Distinct().OrderBy(x => x.Rank).Take(4).Last().Rank) == 3;
             }
-    return (playerHand.Distinct().OrderByDescending(x => x.Rank).First().Rank - playerHand.Distinct().OrderByDescending(x => x.Rank).Last().Rank) == 4;
-
+            return (playerHand.Distinct().OrderByDescending(x => x.Rank).First().Rank - playerHand.Distinct().OrderByDescending(x => x.Rank).Last().Rank) == 4;
         }
         public bool HasFlush()
         {
@@ -127,7 +126,7 @@ namespace PokerPlayer
         }
         public bool HasFourOfAKind()
         {
-            return playerHand.GroupBy(x => x.Rank).Where(x => x.Count() == 4).Count() == 1;
+            return playerHand.GroupBy(x => x.Rank).Where(x => x.Count() == 4).Count() == 1 && playerHand.GroupBy(x => x.Suit).Count() == 4;
         }
         public bool HasStraightFlush()
         {
@@ -135,9 +134,8 @@ namespace PokerPlayer
         }
         public bool HasRoyalFlush()
         {
-            return (playerHand.Distinct().OrderByDescending(x => x.Rank).First().Rank - playerHand.Distinct().OrderByDescending(x => x.Rank).Last().Rank) == 1 && playerHand.GroupBy(x => x.Suit).Where(x => x.Count() == 5).Count() == 1 && playerHand.OrderByDescending(x => x.Rank).First().Equals(Rank.Ace);
+            return HasStraight() && HasFlush() && playerHand.OrderByDescending(x => x.Rank).First().Equals(Rank.Ace) && playerHand.Count <= 5;
         }
-
     }
     class Deck
     {
