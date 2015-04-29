@@ -86,7 +86,9 @@ namespace PokerPlayer
             }
         }
         // Constructor that isn't used
-        public PokerPlayer() { }
+        public PokerPlayer()
+        {
+        }
 
         public Card HighCard()
         {
@@ -108,12 +110,11 @@ namespace PokerPlayer
         public bool HasStraight()
         {
 
-            if (playerHand.Contains(Rank.Ace))
+            if (playerHand.OrderByDescending(x => x.Rank).First().Rank.Equals(14));
             {
-                return (playerHand.Distinct().OrderBy(x => x.Rank).First().Rank - playerHand.Distinct().OrderBy(x => x.Rank).Select(4).Rank) == 3;
+                return (playerHand.Distinct().OrderBy(x => x.Rank).First().Rank) - (playerHand.Distinct().OrderBy(x => x.Rank).Take(4).Last().Rank) == 3;
             }
-
-            return (playerHand.Distinct().OrderByDescending(x => x.Rank).First().Rank - playerHand.Distinct().OrderByDescending(x => x.Rank).Last().Rank) == 4;
+    return (playerHand.Distinct().OrderByDescending(x => x.Rank).First().Rank - playerHand.Distinct().OrderByDescending(x => x.Rank).Last().Rank) == 4;
 
         }
         public bool HasFlush()
@@ -239,28 +240,28 @@ namespace PokerPlayer
             this.Suit = (Suit)suit;
         }
     }
-            public enum Rank
-        {
-            Two = 2,
-            Three,
-            Four,
-            Five,
-            Six,
-            Seven,
-            Eight,
-            Nine,
-            Ten,
-            Jack,
-            Queen,
-            King,
-            Ace
-        }
-        public enum Suit
-        {
-            Club,
-            Heart,
-            Diamond,
-            Spade
-        }
+    public enum Rank
+    {
+        Two = 2,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        Jack,
+        Queen,
+        King,
+        Ace
+    }
+    public enum Suit
+    {
+        Club,
+        Heart,
+        Diamond,
+        Spade
+    }
 
 }
