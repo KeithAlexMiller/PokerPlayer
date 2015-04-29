@@ -134,7 +134,7 @@ namespace PokerPlayer
         }
         public bool HasRoyalFlush()
         {
-            return HasStraight() && HasFlush() && playerHand.OrderByDescending(x => x.Rank).First().Equals(Rank.Ace) && playerHand.Count <= 5;
+            return HasStraight() && HasFlush() && (int)playerHand.OrderByDescending(x => x.Rank).First().Rank == 14;
         }
     }
     class Deck
